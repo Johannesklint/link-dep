@@ -13,7 +13,9 @@
   "keywords": [
     "node",
     "node_modules",
-    "dependencies"
+    "dependencies",
+    "copy",
+    "link"
   ],
   "author": "Johannes Klint",
   "license": "MIT",
