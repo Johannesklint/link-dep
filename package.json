@@ -1,0 +1,24 @@
+{
+  "name": "link-dep",
+  "version": "1.0.0",
+  "description": "Module to copy dependency to static folder",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Johannesklint/link-dep.git"
+  },
+  "keywords": [
+    "node",
+    "node_modules",
+    "dependencies"
+  ],
+  "author": "Johannes Klint",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Johannesklint/link-dep/issues"
+  },
+  "homepage": "https://github.com/Johannesklint/link-dep#readme"
+}
