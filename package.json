@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/Johannesklint/link-dep/issues"
   },
-  "homepage": "https://github.com/Johannesklint/link-dep#readme"
+  "homepage": "https://github.com/Johannesklint/link-dep#readme",
+  "dependencies": {
+    "fs-extra": "^9.0.0"
+  }
 }
