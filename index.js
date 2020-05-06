@@ -1,11 +1,11 @@
-const fs = require('fs-extra')
-const path = require('path')
+const fs = require("fs-extra");
+const path = require("path");
 
 function errorHandling(target, destination) {
-  if (typeof destination !== 'string') {
+  if (typeof destination !== "string") {
     throw new Error(`Not a valid destination folder: ${destination}`);
   }
-  if (typeof target !== 'string') {
+  if (typeof target !== "string") {
     if (Array.isArray(target)) {
       return;
     }
@@ -21,8 +21,8 @@ function getTargets(target) {
 }
 
 /**
- * 
- * @param {String} target dependency target  
+ *
+ * @param {String} target dependency target
  * @param {String} dest destination where the dependency(target) will end up. for example ./public/build
  * @returns {Promise} Will be resolved when the target has been copied
  */
@@ -31,31 +31,28 @@ function linkDependencies(target, destination) {
 
   fs.mkdirpSync(destination);
 
-  const promise = getTargets(target).map(depName => {
-    const rLinkSource = path.join('./node_modules', depName);
-    const rLinkDestiny = path.join(destination, depName);
+  const promise = getTargets(target).map((depName) => {
+    const depSource = path.resolve(path.join("./node_modules", depName));
+    const depDestination = path.resolve(path.join(destination, depName));
 
-    const linkSource = path.resolve(rLinkSource);
-    const linkDestiny = path.resolve(rLinkDestiny);
-
-    return new Promise(resolve => {
-      fs.ensureDir(linkDestiny, resolve);
+    return new Promise((resolve) => {
+      fs.ensureDir(depDestination, resolve);
     })
       .then(
-        err =>
-          new Promise(resolve => {
+        (err) =>
+          new Promise((resolve) => {
             if (err) {
               resolve();
             } else {
-              fs.remove(linkDestiny, resolve);
+              fs.remove(depDestination, resolve);
             }
-          }),
+          })
       )
       .then(
         () =>
-          new Promise(resolve => {
-            fs.symlink(linkSource, linkDestiny, 'dir', resolve);
-          }),
+          new Promise((resolve) => {
+            fs.symlink(depSource, depDestination, "dir", resolve);
+          })
       )
       .catch(console.error);
   });
