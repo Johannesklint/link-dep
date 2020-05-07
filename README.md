@@ -66,7 +66,7 @@ app.get("/", (req, res) => {
 });
 
 // index.html
-<script src="/script/some-dependency">
+<script src="static/script/some-dependency">
 // some-depenedency will now be ran
 
 …………………………………………………………………………………………………………………………………………………………
