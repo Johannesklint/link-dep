@@ -22,8 +22,8 @@ function getTargets(target) {
 
 /**
  *
- * @param {String} target dependency target
- * @param {String} dest destination where the dependency(target) will end up. for example ./public/build
+ * @param {Array}   target dependency target
+ * @param {String} destination destination where the dependency(target) will end up. for example ./public/build
  * @returns {Promise} Will be resolved when the target has been copied
  */
 function linkDependencies(target, destination) {
