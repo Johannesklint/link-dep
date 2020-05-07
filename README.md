@@ -1,6 +1,7 @@
 # link-dep
 
-Module to link dependencies to static folder
+Module to link dependencies to static folder.
+For some reason you might want to use a install dependency in let's say your index.html file which might be served from `express`
 
 ## Usage
 
@@ -12,7 +13,7 @@ const linkDep = require("link-dep");
 await linkDep("fs-extra", "./public/scripts");
 ```
 
-Pass in an array as the first argument for copying multiple directories.
+Pass in an array as the first argument for copying multiple dependencies.
 
 ```jsx
 const linkDep = require("link-dep");
@@ -46,4 +47,30 @@ const linkDep = require("link-dep");
 linkDep("fs-extra", "./public/scripts")
   .then(() => console.log("Yes!"))
   .catch(() => console.error("Something went wrong!"));
+```
+
+#### Together with [express](https://expressjs.com/)
+
+```js
+const path = require("path");
+const express = require("express");
+const linkDep = require("link-dep");
+
+const app = express();
+// `sayHi`-module doesn't exist, its created at the bottom, btw it's really complex. 🧠
+await linkDep("say-hi", "./public/scripts");
+
+app.use("/static", express.static(path.join(`${__dirname}/public`)));
+app.get("/", (req, res) => {
+  res.sendFile("./index.html");
+});
+
+// index.html
+<script src="/script/some-dependency">
+// some-depenedency will now be ran
+
+…………………………………………………………………………………………………………………………………………………………
+
+// say-hi module 
+module.exports = console.log("I'm saying hi");
 ```
