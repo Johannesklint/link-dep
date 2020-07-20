@@ -5,12 +5,12 @@ For some reason you might want to use a install dependency in let's say your ind
 
 ## Usage
 
-Pass in a string as the first argument
+Pass in a string as the first argument. The second argument is where you would like to place the copied module
 
 ```jsx
 const linkDep = require("link-dep");
 
-await linkDep("fs-extra", "./public/scripts");
+await linkDep("fs-extra", "./public/some-path");
 ```
 
 Pass in an array as the first argument for copying multiple dependencies.
@@ -18,7 +18,7 @@ Pass in an array as the first argument for copying multiple dependencies.
 ```jsx
 const linkDep = require("link-dep");
 
-await linkDep(["fs-extra", "chalk"], "./public/scripts");
+await linkDep(["fs-extra", "chalk"], "./public/some-path");
 ```
 
 ---
@@ -30,7 +30,7 @@ const linkDep = require("link-dep");
 
 async function copy() {
   try {
-    await linkDep("fs-extra", "./public/scripts");
+    await linkDep("fs-extra", "./public/some-path");
   } catch (error) {
     throw new Error("Noo", error);
   }
@@ -44,7 +44,7 @@ await copy();
 ```jsx
 const linkDep = require("link-dep");
 
-linkDep("fs-extra", "./public/scripts")
+linkDep("fs-extra", "./public/some-path");
   .then(() => console.log("Yes!"))
   .catch(() => console.error("Something went wrong!"));
 ```
@@ -57,7 +57,8 @@ const express = require("express");
 const linkDep = require("link-dep");
 
 const app = express();
-// `sayHi`-module doesn't exist, its created at the bottom, btw it's really complex. 🧠
+// `sayHi`-module doesn't exist on npm, it's created at the bottom, btw it's really complex. 🧠
+// the module is just for demostration purposes
 await linkDep("say-hi", "./public/scripts");
 
 app.use("/static", express.static(path.join(`${__dirname}/public`)));
@@ -66,7 +67,7 @@ app.get("/", (req, res) => {
 });
 
 // index.html
-<script src="static/script/some-dependency">
+<script src="static/script/say-hi">
 // some-depenedency will now be ran
 
 …………………………………………………………………………………………………………………………………………………………
